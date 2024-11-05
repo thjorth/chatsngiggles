@@ -4,7 +4,7 @@ const app = express();
 
 app.get("/", (req, res) => res.send("Express on Vercel #2"));
 
-//app.get("/test/", (req, res) => res.send("This is a test"));
+app.get("/test/", (req, res) => res.send("This is a test"));
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
