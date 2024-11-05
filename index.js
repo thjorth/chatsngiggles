@@ -1,11 +1,17 @@
 
 const express = require("express");
 const app = express();
+const router = express.Router();
 
-app.get("/", (req, res) => res.send("Express on Vercel #2"));
+router.get('/hello', (req, res) => {
+	res.send('Hello from Express on Vercel!');
+});
 
-app.get("/test/", (req, res) => res.send("This is a test"));
+router.get("/", (req, res) => res.send("Express on Vercel #2"));
 
+router.get("/test/", (req, res) => res.send("This is a test"));
+
+app.use('/api', router);
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
 module.exports = app;
