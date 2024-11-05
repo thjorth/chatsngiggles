@@ -1,7 +1,7 @@
 {
     "version": 2,
-    "routes": [
-        { "src": "/test/", "dest": "/api/test.js" },
-        { "src": "/", "dest": "/api/index2.js" }
+    "rewrites": [
+        { "source": "/test/", "destination": "/api/test.js" },
+        { "source": "/", "destination": "/api/index2.js" }
     ]
   }
