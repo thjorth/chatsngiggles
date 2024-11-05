@@ -136,7 +136,7 @@ async function run() {
 		],
 	});
 
-	const result = await chatSession.sendMessage("can you?");
+	const result = await chatSession.sendMessage("can");
 	console.log(result.response.text());
 }
 
