@@ -1,7 +1,7 @@
 {
     "version": 2,
     "routes": [
-        { "src": "/test", "dest": "/api?path=test" },
+        { "src": "/test", "dest": "/api/test.js" },
         { "src": "/(?<path>.*)", "dest": "/api?path=$path" }
     ]
   }
