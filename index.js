@@ -2,7 +2,7 @@
 const express = require("express");
 const app = express();
 
-app.get("/", (req, res) => res.send("Express on Vercel"));
+app.get("/", (req, res) => res.send("Express on Vercel #2"));
 
 //app.get("/test/", (req, res) => res.send("This is a test"));
 
