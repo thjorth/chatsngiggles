@@ -22,6 +22,8 @@ class ChatBot extends HTMLElement {
         this._input = this._form.querySelector('[data-input]');
         this._response = this._form.querySelector('[data-response]');
 
+        this.clearContext();
+
         console.log(this._input, this._form);
     }
 
@@ -41,12 +43,46 @@ class ChatBot extends HTMLElement {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    question: question
+                    question: question,
+                    context: this.getContextAsString(),
                 }),
             }
         );
         const result = await response.json();
+        this.storeContext(result.question, result.markdown);
         this._response.innerHTML += result.html;
+    }
+
+    clearContext() {
+        if (localStorage.getItem('context')) {
+            localStorage.removeItem('context');
+        }
+    }
+
+    storeContext(question, answer) {
+        const context = localStorage.getItem('context') ? JSON.parse(localStorage.getItem('context')) : [];
+        context.push({
+            user: question,
+            assistant: answer
+        });
+        localStorage.setItem('context', JSON.stringify(context));
+    }
+
+    getContext() {
+        if (localStorage.getItem('context')) {
+            return JSON.parse(localStorage.getItem('context'));
+        }
+        return [];
+    }
+
+    getContextAsString() {
+        const context = this.getContext();
+        console.log('context:', context);
+        let contextFormattedArray = [];
+        context.forEach(element => {
+            contextFormattedArray.push(`user: ${element.user}\nassistant: ${element.assistant}\n\n\n`);
+        });
+        return contextFormattedArray.join('\n******\n');
     }
 }
 

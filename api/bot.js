@@ -148,12 +148,14 @@ async function ask(question) {
 app.use(express.json());
 
 app.post("/bot", async (req, res) => {
-    console.log(req.body.question);
-    const result = await ask(req.body.question);
+    console.log('context + question:\n\n' + req.body.context + '\n\n' + req.body.question);
+    const result = await ask(req.body.context + '\n\n' + req.body.question);
     const markdown = result.response.text();
     const html = marked.parse(markdown);
 
     return res.json({
+        question: req.body.question,
+        markdown,
         html,
     });
 
