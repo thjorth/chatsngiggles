@@ -7,7 +7,6 @@ questionTemplate.innerHTML = `
             <div data-answers>
 
             </div>
-            <button>Click to go to next step</button>
         </form>
     </div>
 `;
@@ -21,8 +20,6 @@ class Question extends HTMLElement {
         super();
         this.root = this.attachShadow({ mode: 'open' });
         this.root.appendChild(questionTemplate.content.cloneNode(true));
-        this.button = this.root.querySelector('button');
-        this.button.addEventListener('click', this.proceed);
         this.model = {};
         this.uiHasBeenBuilt = false;
         this.initLocalStorage();

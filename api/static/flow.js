@@ -23,12 +23,17 @@ class Flow extends HTMLElement {
 
         // attach an event listener, that allows the user to progress through the flow
         document.addEventListener('flow:next', () => {
-            console.log('on next:')
             if (this.currentStep < this.numberOfSteps - 1) {
                 this.currentStep++;
                 this.updateFlowState();
             }
         });
+        document.addEventListener('flow:skip-to-last', () => {
+            if (this.currentStep != this.numberOfSteps - 1) {
+                this.currentStep = this.numberOfSteps - 1;
+                this.updateFlowState();
+            }
+        })
     }
 
     updateFlowState() {
