@@ -11,6 +11,7 @@ questionTemplate.innerHTML = `
         </form>
     </div>
 `;
+
 class Question extends HTMLElement {
     static get observedAttributes() {
         return ['question'];

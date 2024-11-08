@@ -2,14 +2,30 @@
 const template = document.createElement('template');
 template.innerHTML = `
     <form>
-        <div class="chat__response-container">
-            <div data-response class="chat__response">
+        <div class="container" data-response>
 
-            </div>
         </div>
         <input type="text" data-input class="chat__input" />
         <input type="submit" class="chat__submit" style="xvisibility: hidden;" />
     </form>
+`;
+
+const userQuestionTemplate = document.createElement('template');
+userQuestionTemplate.innerHTML = `
+    <div class="chat__question">
+        <div class="chat__question-content" data-chat-question>
+            $q$
+        </div>
+    </div>
+`;
+
+const botAnswerTemplate = document.createElement('template');
+botAnswerTemplate.innerHTML = `
+    <div class="chat__answer">
+        <div class="chat__answer-content" data-chat-answer>
+            $a$
+        </div>
+    </div>
 `;
 
 class ChatBot extends HTMLElement {
@@ -36,7 +52,13 @@ class ChatBot extends HTMLElement {
         this.ask(this._input.value);
     }
 
-    async ask(question) {
+    async ask(question, hideQuestion) {
+        if (!hideQuestion) {
+            const qElement = userQuestionTemplate.content.cloneNode(true);
+            const qContainer = qElement.querySelector('[data-chat-question]');
+            qContainer.innerHTML = qContainer.innerHTML.replace('$q$', question);
+            this._response.appendChild(qElement);
+        }
         const response = await fetch(
             '/bot',
             {
@@ -53,11 +75,14 @@ class ChatBot extends HTMLElement {
         );
         const result = await response.json();
         this.storeContext(result.question, result.markdown);
-        this._response.innerHTML += result.html;
+        const aElement = botAnswerTemplate.content.cloneNode(true);
+        const aContainer = aElement.querySelector('[data-chat-answer]');
+        aContainer.innerHTML = aContainer.innerHTML.replace('$a$', result.html);
+        this._response.appendChild(aElement);
     }
 
     askInitialQuestion() {
-        this.ask('What do you suggest Crayon could help us with?')
+        this.ask('What do you suggest Crayon could help us with?', true);
     }
 
     clearContext() {
