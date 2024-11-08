@@ -23,8 +23,11 @@ class ChatBot extends HTMLElement {
         this._response = this._form.querySelector('[data-response]');
 
         this.clearContext();
-
-        console.log(this._input, this._form);
+        document.addEventListener('step:activate', (e) => {
+            if (e.detail === this) {
+                this.askInitialQuestion();
+            }
+        })
     }
 
     submit(event) {
@@ -53,6 +56,10 @@ class ChatBot extends HTMLElement {
         this._response.innerHTML += result.html;
     }
 
+    askInitialQuestion() {
+        this.ask('What do you suggest Crayon could help us with?')
+    }
+
     clearContext() {
         if (localStorage.getItem('context')) {
             localStorage.removeItem('context');
@@ -76,13 +83,20 @@ class ChatBot extends HTMLElement {
     }
 
     getContextAsString() {
+        const seeds = localStorage.getItem('seeds') ? JSON.parse(localStorage.getItem('seeds')) : [];
+        let seed = '';
+        if (seeds.length > 0) {
+            seed = seeds.join(' ');
+            seed += ' Please keep this in mind when aswering all questions. When replying, do not use emojis. Keep the answers to a few paragraphs. For the first question, please invite to ask more questions in the chat or contact sales.\n\n'
+        }
+
         const context = this.getContext();
         console.log('context:', context);
         let contextFormattedArray = [];
         context.forEach(element => {
             contextFormattedArray.push(`user: ${element.user}\nassistant: ${element.assistant}\n\n\n`);
         });
-        return contextFormattedArray.join('\n******\n');
+        return seed + contextFormattedArray.join('\n******\n');
     }
 }
 
