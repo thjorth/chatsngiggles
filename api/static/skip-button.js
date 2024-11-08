@@ -1,7 +1,7 @@
 const skipButtonTemplate = document.createElement('template');
 skipButtonTemplate.innerHTML = `
     <div class="skip">
-        <button data-skip-button class="skip__button">Skip assesment</button>
+        <button data-skip-button class="skip__button">Skip assessment</button>
     </div>
 `;
 
