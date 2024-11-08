@@ -28,6 +28,18 @@ botAnswerTemplate.innerHTML = `
     </div>
 `;
 
+const introTemplate = document.createElement('template');
+introTemplate.innerHTML = `
+    <div class="chat__intro">
+        <div class="chat__intro-content" data-chat-answer>
+            <h1>Hello and welcome</h1>
+            <p>
+                How can I help you today?
+            </p>
+        </div>
+    </div>
+`;
+
 class ChatBot extends HTMLElement {
     constructor() {
         super();
@@ -54,10 +66,7 @@ class ChatBot extends HTMLElement {
 
     async ask(question, hideQuestion) {
         if (!hideQuestion) {
-            const qElement = userQuestionTemplate.content.cloneNode(true);
-            const qContainer = qElement.querySelector('[data-chat-question]');
-            qContainer.innerHTML = qContainer.innerHTML.replace('$q$', question);
-            this._response.appendChild(qElement);
+            this.appendQuestion(question);
         }
         const response = await fetch(
             '/bot',
@@ -75,14 +84,31 @@ class ChatBot extends HTMLElement {
         );
         const result = await response.json();
         this.storeContext(result.question, result.markdown);
+        this.appendAnswer(result.html)
+    }
+
+    appendQuestion(question) {
+        const qElement = userQuestionTemplate.content.cloneNode(true);
+        const qContainer = qElement.querySelector('[data-chat-question]');
+        qContainer.innerHTML = qContainer.innerHTML.replace('$q$', question);
+        this._response.appendChild(qElement);
+    }
+
+    appendAnswer(answer) {
         const aElement = botAnswerTemplate.content.cloneNode(true);
         const aContainer = aElement.querySelector('[data-chat-answer]');
-        aContainer.innerHTML = aContainer.innerHTML.replace('$a$', result.html);
+        aContainer.innerHTML = aContainer.innerHTML.replace('$a$', answer);
         this._response.appendChild(aElement);
     }
 
     askInitialQuestion() {
-        this.ask('What do you suggest Crayon could help us with?', true);
+        const seeds = localStorage.getItem('seeds') ? JSON.parse(localStorage.getItem('seeds')) : [];
+        if (seeds.length > 0) {
+            this.ask('What do you suggest Crayon could help us with?', true);
+        }
+        else {
+            this._response.appendChild(introTemplate.content.cloneNode(true));
+        }
     }
 
     clearContext() {
