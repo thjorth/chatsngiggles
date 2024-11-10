@@ -1,6 +1,11 @@
 
 const questionTemplate = document.createElement('template');
 questionTemplate.innerHTML = `
+    <style>
+        
+        @import "/static/styles.css?v=2";
+
+    </style>
     <div class="question">
         <form>
             <h2 data-question></h2>

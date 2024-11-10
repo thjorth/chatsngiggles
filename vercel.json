@@ -20,9 +20,10 @@
     ],
     "rewrites": [
         {
-            "source": "/static/:path",
+            "source": "/static/:path(.*)",
             "destination": "api/static.js"
         },
+
         {
             "source": "/",
             "destination": "api/index.js"

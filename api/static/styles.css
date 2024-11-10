@@ -1,0 +1,18 @@
+body {
+    background: white;
+    margin: 0;
+    font-family: 'Sofia Pro Regular';
+}
+h2 {
+    font-weight: 300;
+    font-size: 32px;
+    font-family: 'Sofia Pro Regular';
+}
+
+.app-container {
+    background: #F8F8F8;
+    max-width: 390px;
+    margin: auto;
+    height: 844px;
+    max-height: 100vh;
+}
