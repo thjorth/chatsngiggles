@@ -1,5 +1,4 @@
-
-const questionTemplate = document.createElement('template');
+const questionTemplate = document.createElement("template");
 questionTemplate.innerHTML = `
     <style>
         
@@ -9,86 +8,81 @@ questionTemplate.innerHTML = `
     <div class="question">
         <form>
             <h2 data-question></h2>
-            <div data-answers>
-
-            </div>
+            <div data-answers>  </div>
         </form>
     </div>
 `;
 
 class Question extends HTMLElement {
-    static get observedAttributes() {
-        return ['question'];
-    }
+  static get observedAttributes() {
+    return ["question"];
+  }
 
-    constructor() {
-        super();
-        this.root = this.attachShadow({ mode: 'open' });
-        this.root.appendChild(questionTemplate.content.cloneNode(true));
-        this.model = {};
-        this.uiHasBeenBuilt = false;
-        this.initLocalStorage();
-    }
+  constructor() {
+    super();
+    this.root = this.attachShadow({ mode: "open" });
+    this.root.appendChild(questionTemplate.content.cloneNode(true));
+    this.model = {};
+    this.uiHasBeenBuilt = false;
+    this.initLocalStorage();
+  }
 
-    connectedCallback() {
-    }
+  connectedCallback() {}
 
-    initLocalStorage() {
-        if (localStorage.getItem('seeds')) {
-            localStorage.removeItem('seeds');
+  initLocalStorage() {
+    if (localStorage.getItem("seeds")) {
+      localStorage.removeItem("seeds");
+    }
+    localStorage.setItem("seeds", JSON.stringify([]));
+  }
+
+  attributeChangedCallback(property, oldValue, newValue) {
+    if (this.uiHasBeenBuilt) {
+      return;
+    }
+    switch (property) {
+      case "question":
+        try {
+          this.model = JSON.parse(newValue);
+        } catch (ex) {
+          console.log(ex);
         }
-        localStorage.setItem('seeds', JSON.stringify([]));
+        break;
     }
+    this.buildUi();
+    console.log("this.model", this.model);
+  }
 
-    attributeChangedCallback(property, oldValue, newValue) {
-        if (this.uiHasBeenBuilt) {
-            return;
-        }
-        switch (property) {
-            case "question":
-                try {
-                    this.model = JSON.parse(newValue);
+  buildUi() {
+    this.root.querySelector("[data-question]").innerHTML = this.model.question;
+    console.log(this.model);
+    this.model.answers.forEach((answer) => {
+      const button = document.createElement("button");
+      button.textContent = answer.text;
+      button.value = answer.value;
+      button.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.recordAnswer(e.target.value);
+        this.proceed();
+      });
+      this.root.querySelector("[data-answers]").appendChild(button);
+    });
+    this.uiHasBeenBuilt = true;
+  }
 
-                }
-                catch (ex) {
-                    console.log(ex);
-                }
-                break;
-        }
-        this.buildUi();
-        console.log('this.model', this.model);
+  recordAnswer(answer) {
+    const seeds = JSON.parse(localStorage.getItem("seeds"));
+    seeds.push(answer);
+    localStorage.setItem("seeds", JSON.stringify(seeds));
+  }
+
+  proceed(e) {
+    if (e) {
+      e.preventDefault();
     }
-
-    buildUi() {
-        this.root.querySelector('[data-question]').innerHTML = this.model.question;
-        console.log(this.model)
-        this.model.answers.forEach(answer => {
-            const button = document.createElement('button');
-            button.textContent = answer.text;
-            button.value = answer.value;
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.recordAnswer(e.target.value);
-                this.proceed();
-            });
-            this.root.querySelector('[data-answers]').appendChild(button);
-        });
-        this.uiHasBeenBuilt = true;
-    }
-
-    recordAnswer(answer) {
-        const seeds = JSON.parse(localStorage.getItem('seeds'));
-        seeds.push(answer);
-        localStorage.setItem('seeds', JSON.stringify(seeds));
-    }
-
-    proceed(e) {
-        if (e) {
-            e.preventDefault();
-        }
-        const event = new Event('flow:next');
-        document.dispatchEvent(event);
-    }
+    const event = new Event("flow:next");
+    document.dispatchEvent(event);
+  }
 }
 
-customElements.define('question-component', Question);   
+customElements.define("question-component", Question);

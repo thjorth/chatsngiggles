@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>Crayon - chatbot</title>
     <script src="/static/flow.js"></script>
     <script src="/static/question.js"></script>
     <script src="/static/chat-bot.js"></script>
     <script src="/static/skip-button.js"></script>
     <style>
-        .flow__hidden {
-            display: none;
-        }
+      .flow__hidden {
+        display: none;
+      }
     </style>
 
-    <link rel="stylesheet" type="text/css" href="/static/fonts/font-styles.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/static/fonts/font-styles.css"
+    />
     <link rel="stylesheet" type="text/css" href="/static/styles.css?v=1" />
-</head>
-<body>
+  </head>
+  <body>
     <div class="app-container">
-        <flow-component>
-            <question-component
-                question='{
+      <div>
+        <img src="api/assets/logo.svg" />
+      </div>
+      <flow-component>
+        <question-component
+          question='{
                     "question": "What are the main challenges you are facing with your internal processes?",
                     "answers": [
                         {
@@ -36,9 +43,9 @@
                         }
                     ]
                 }'
-            ></question-component>
-            <question-component
-                question='{
+        ></question-component>
+        <question-component
+          question='{
                     "question": "Which areas of your business are you looking to streamline or reduce costs in?",
                     "answers": [
                         {
@@ -63,9 +70,9 @@
                         }
                     ]
                 }'
-            ></question-component>
-            <question-component
-                question='{
+        ></question-component>
+        <question-component
+          question='{
                     "question": "Are you currently using software tools to manage these areas, and how well do they integrate?",
                     "answers": [
                         {
@@ -86,11 +93,10 @@
                         }
                     ]
                 }'
-            ></question-component>
-            <chat-bot class="chat"></chat-bot>
-        </flow-component>
-        <skip-button></skip-button>
+        ></question-component>
+        <chat-bot class="chat"></chat-bot>
+      </flow-component>
+      <skip-button></skip-button>
     </div>
-
-</body>
+  </body>
 </html>

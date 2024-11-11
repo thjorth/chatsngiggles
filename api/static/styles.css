@@ -1,19 +1,39 @@
+:root {
+  --font-family: "Sofia Pro Regular";
+  --heading-large: "32px";
+  --heading-medium:"20px";
+  --heading-small: "16px";
+
+  --line-height-large: "32px";
+  --line-height-small: "24px;"
+
+  --font-weight-heavy: "300"
+
+  --text-large: "12px";
+  --text-medium: "10,5px";
+  --text-small: "10px";
+  --black: "#04242D";
+  --cloudberry: "#FF6A4C";
+"
+
+
+}
+
 body {
-    background: white;
-    margin: 0;
-    font-family: 'Sofia Pro Regular';
+  background: white;
+  margin: 0;
+  font-family: "Sofia Pro Regular";
 }
 h2 {
-    font-weight: 300;
-    font-size: 32px;
-    font-family: 'Sofia Pro ExtraLight';
+  font-weight: 300;
+  font-size: 32px;
+  font-family: "Sofia Pro ExtraLight";
 }
 
 .app-container {
-    background: #F8F8F8;
-    max-width: 390px;
-    margin: auto;
-    height: 844px;
-    max-height: 100vh;
-    padding: 16px;
+  background: #f8f8f8;
+  max-width: 390px;
+  margin: auto;
+  max-height: 100vh;
+  padding: 16px;
 }
