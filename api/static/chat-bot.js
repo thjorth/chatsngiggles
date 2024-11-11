@@ -1,10 +1,39 @@
 const template = document.createElement("template");
 template.innerHTML = `
+<style>
+.chat__submit{
+    all: unset;
+    background: #FF6A4C;
+    border: 1px solid #FF6A4C;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+ 
+&:hover, &:focus {
+    opacity: 0.5;
+    cursor: pointer;
+}
+}
+.input__container {
+    align-items: center;
+    background: white;
+    border: 1px solid #FF6A4C;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.chat__input {
+    border: none;
+    height: 48px;
+    width: auto;
+}
+</style>
     <form>
         <div class="container" data-response>
         </div>
-        <input type="text" data-input class="chat__input" />
-        <input type="submit" class="chat__submit" style="xvisibility: hidden;" />
+        <div class="input__container">
+        <input type="text" data-input class="chat__input"/>
+        <input type="submit" class="chat__submit" style="xvisibility: hidden;" /></div>
     </form>
 `;
 
@@ -19,26 +48,20 @@ userQuestionTemplate.innerHTML = `
 
 const botAnswerTemplate = document.createElement("template");
 botAnswerTemplate.innerHTML = `
+
+
     <div class="chat__answer">
         <div class="chat__answer-content" data-chat-answer>
             $a$
         </div>
     </div>
 `;
-// const headerTemplate = document.createElement("template");
-// introTemplate.innerHTML = `
-//     <div class="header">
-//         <div class="header">
-
-//             <p>
-// HEADER
-//             </p>
-//         </div>
-//     </div>
-// `;
 
 const introTemplate = document.createElement("template");
 introTemplate.innerHTML = `
+<style>
+
+</style>
     <div class="chat__intro">
         <div class="chat__intro-content" data-chat-answer>
             <h1>Hello and welcome</h1>

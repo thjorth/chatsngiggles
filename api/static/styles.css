@@ -14,26 +14,78 @@
   --text-small: "10px";
   --black: "#04242D";
   --cloudberry: "#FF6A4C";
-"
 
+  --padding-inline: 16px;
+  --padding-block: 24px;
+
+  --margin-inline: 16px;
+  --margin-block: 24px;
 
 }
+
 
 body {
-  background: white;
-  margin: 0;
+  background: #f8f8f8;
   font-family: "Sofia Pro Regular";
+  margin: 0;
+  max-height: 100vh;
+  max-width: 100vw;
 }
+
 h2 {
   font-weight: 300;
   font-size: 32px;
   font-family: "Sofia Pro ExtraLight";
 }
 
-.app-container {
+
+.app{
   background: #f8f8f8;
-  max-width: 390px;
+  max-width: 100vw;
   margin: auto;
   max-height: 100vh;
-  padding: 16px;
 }
+
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.header-container {
+  border: 1px solid red;
+  height: 104px;
+}
+
+.header {
+display: flex;
+ flex-direction: row;
+ align-items: center;
+padding-inline: var(--padding-inline);
+margin-block: var(--margin-block);
+ justify-content: space-between;
+ backdrop-filter: blur(10px);
+
+}
+.header-logo {
+    align-content: baseline;
+}
+
+
+.flow-container {
+    border: 1px solid red;
+    padding-inline: var(--padding-inline);
+margin-block: var(--margin-block);
+
+}
+
+.chat {
+    border: 1px solid red;
+}
+
+.footer {
+    border: 1px solid green;
+    background-color: #F3F3F3;
+  }
+

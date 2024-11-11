@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Crayon - chatbot</title>
     <script src="/static/flow.js"></script>
     <script src="/static/question.js"></script>
@@ -19,84 +20,101 @@
     />
     <link rel="stylesheet" type="text/css" href="/static/styles.css?v=1" />
   </head>
-  <body>
+  <body class="app">
     <div class="app-container">
-      <div>
-        <img src="api/assets/logo.svg" />
+      <div class="header-container">
+        <div class="header">
+          <div>
+            <img src="static/assets/cross.svg" />
+          </div>
+          <div class="header-logo">
+            <img src="static/assets/logo.svg" />
+          </div>
+          <div>
+            <img src="static/assets/hamburger.svg" />
+          </div>
+        </div>
       </div>
-      <flow-component>
-        <question-component
-          question='{
-                    "question": "What are the main challenges you are facing with your internal processes?",
-                    "answers": [
-                        {
-                            "text": "Manual data entry",
-                            "value": "Our main challenge is manual data entry."
-                        },
-                        {
-                            "text": "Lack of real-time insights",
-                            "value": "Our main challenge is a lack of real-time insights."
-                        },
-                        {
-                            "text": "Bottlenecks in our workflows",
-                            "value": "Our main challenge is bottlenecks in our workflows."
-                        }
-                    ]
-                }'
-        ></question-component>
-        <question-component
-          question='{
-                    "question": "Which areas of your business are you looking to streamline or reduce costs in?",
-                    "answers": [
-                        {
-                            "text": "Finance",
-                            "value": "We would like to streamline or reduce costs in finance."
-                        },
-                        {
-                            "text": "HR",
-                            "value": "We would like to streamline or reduce costs in HR."
-                        },
-                        {
-                            "text": "Sales",
-                            "value": "We would like to streamline or reduce costs in sales."
-                        },
-                        {
-                            "text": "Inventory/Supply Chain",
-                            "value": "We would like to streamline or reduce costs in inventory/supply Chain."
-                        },
-                        {
-                            "text": "All of the above",
-                            "value": "We would like to streamline or reduce costs in finance, HR, sales, and inventory/supply chain."
-                        }
-                    ]
-                }'
-        ></question-component>
-        <question-component
-          question='{
-                    "question": "Are you currently using software tools to manage these areas, and how well do they integrate?",
-                    "answers": [
-                        {
-                            "text": "Fully integrated",
-                            "value": "Our software is fully integrated in these areas."
-                        },
-                        {
-                            "text": "Limited exchange",
-                            "value": "Our software is not fully integrated in these areas and offer limited exchange."
-                        },
-                        {
-                            "text": "Disconnected",
-                            "value": "Our software is largely disconnected and offer little to no connection."
-                        },
-                        {
-                            "text": "primarily manual",
-                            "value": "We ar eprimarily handling these areas manually."
-                        }
-                    ]
-                }'
-        ></question-component>
-        <chat-bot class="chat"></chat-bot>
-      </flow-component>
-      <skip-button></skip-button>
+
+      <section class="flow-container">
+        <flow-component>
+          <question-component
+            question='{
+                        "question": "What are the main challenges you are facing with your internal processes?",
+                        "answers": [
+                            {
+                                "text": "Manual data entry",
+                                "value": "Our main challenge is manual data entry."
+                            },
+                            {
+                                "text": "Lack of real-time insights",
+                                "value": "Our main challenge is a lack of real-time insights."
+                            },
+                            {
+                                "text": "Bottlenecks in our workflows",
+                                "value": "Our main challenge is bottlenecks in our workflows."
+                            }
+                        ]
+                    }'
+          ></question-component>
+          <question-component
+            question='{
+                        "question": "Which areas of your business are you looking to streamline or reduce costs in?",
+                        "answers": [
+                            {
+                                "text": "Finance",
+                                "value": "We would like to streamline or reduce costs in finance."
+                            },
+                            {
+                                "text": "HR",
+                                "value": "We would like to streamline or reduce costs in HR."
+                            },
+                            {
+                                "text": "Sales",
+                                "value": "We would like to streamline or reduce costs in sales."
+                            },
+                            {
+                                "text": "Inventory/Supply Chain",
+                                "value": "We would like to streamline or reduce costs in inventory/supply Chain."
+                            },
+                            {
+                                "text": "All of the above",
+                                "value": "We would like to streamline or reduce costs in finance, HR, sales, and inventory/supply chain."
+                            }
+                        ]
+                    }'
+          ></question-component>
+          <question-component
+            question='{
+                        "question": "Are you currently using software tools to manage these areas, and how well do they integrate?",
+                        "answers": [
+                            {
+                                "text": "Fully integrated",
+                                "value": "Our software is fully integrated in these areas."
+                            },
+                            {
+                                "text": "Limited exchange",
+                                "value": "Our software is not fully integrated in these areas and offer limited exchange."
+                            },
+                            {
+                                "text": "Disconnected",
+                                "value": "Our software is largely disconnected and offer little to no connection."
+                            },
+                            {
+                                "text": "primarily manual",
+                                "value": "We ar eprimarily handling these areas manually."
+                            }
+                        ]
+                    }'
+          ></question-component>
+
+          <chat-bot class="chat"></chat-bot>
+        </flow-component>
+      </section>
+
+      <div class="footer">
+        <skip-button></skip-button>
+      </div>
     </div>
   </body>
 </html>
