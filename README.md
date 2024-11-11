@@ -7,4 +7,4 @@ create .env
 .env local 
 
 start: vercel dev 
-
+ead
