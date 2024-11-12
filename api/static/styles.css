@@ -71,9 +71,6 @@ h2 {
   padding-inline: var(--padding-inline);
   margin-block: var(--margin-block);
 }
-.chat {
-  border: 1px solid red;
-}
 .footer {
   background-color: #F3F3F3;
   }
