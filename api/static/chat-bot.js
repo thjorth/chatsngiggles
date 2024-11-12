@@ -7,9 +7,9 @@ template.innerHTML = `
     border: 1px solid #FF6A4C;
     border-radius: 50%;
     display: flex;
-    height: 40px;
+    height: 32px;
     justify-items: center;
-    width: 40px;
+    width: 32px;
  
 &:hover, &:focus {
     opacity: 0.5;
@@ -17,26 +17,30 @@ template.innerHTML = `
 }
 }
 .input__container {
+margin-block-start: 400px;
     align-items: center;
     background: white;
     border: 1px solid #FF6A4C;
-    border-radius: 10px;
+    border-radius: 24px;
     display: flex;
-    justify-content: space-between;
-    padding-inline: 8px;
+
 }
 .chat__input {
+
     border: none;
     height: 48px;
     min-width:290px;
-    max-width:300px;
+    max-width:358px;
+       margin-inline-start: 20px;
+    font-size: 16px;
+    font-family: Sofia Pro Regular;
 }
 </style>
     <form>
         <div class="container" data-response>
         </div>
         <div class="input__container">
-        <input type="text" data-input class="chat__input"/>
+        <input type="text" data-input class="chat__input" placeholder="What are you looking for?"></input>
         <button type="submit" class="chat__submit" style="xvisibility: hidden;"><img src="static/assets/submit.svg"/></button>
     </form>
 `;
