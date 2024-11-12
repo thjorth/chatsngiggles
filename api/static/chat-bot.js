@@ -26,7 +26,6 @@ margin-block-start: 400px;
 
 }
 .chat__input {
-
     border: none;
     height: 48px;
     min-width:290px;

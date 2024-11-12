@@ -6,7 +6,7 @@ skipButtonTemplate.innerHTML = `
     color: gray;
     opacity: 0.5;
     line-height: 24px;
-    margin-block: 24px;
+    margin-block-end: 56px;
     margin-inline: 16px;
 
 &:hover, &:focus {
