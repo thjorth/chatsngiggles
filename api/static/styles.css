@@ -22,6 +22,7 @@
 
   --margin-inline: 16px;
   --margin-block: 24px;
+  --margin-block-end-large: 36px;
 
 }
 
@@ -55,6 +56,8 @@ h2 {
 }
 .header-container {
   height: 104px;
+  position: sticky;
+  z-index: 10;
 }
 .header {
   align-items: center;
@@ -70,9 +73,9 @@ h2 {
 }
 .flow-container {
   padding-inline: var(--padding-inline);
-  margin-block: var(--margin-block);
 }
 .footer {
   background-color: #F3F3F3;
+  margin-block-end: var( --margin-block-end-large);
   }
 

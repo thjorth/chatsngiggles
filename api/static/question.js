@@ -25,6 +25,7 @@ questionTemplate.innerHTML = `
             <div class="data__answers" data-answers></div>
         </form>
     </div>
+      
 `;
 
 class Question extends HTMLElement {
