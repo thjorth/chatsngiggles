@@ -21,11 +21,13 @@ template.innerHTML = `
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
+    padding-inline: 8px;
 }
 .chat__input {
     border: none;
     height: 48px;
-    width: auto;
+    min-width:290px ;
+    max-width:300px ;
 }
 </style>
     <form>
@@ -33,7 +35,7 @@ template.innerHTML = `
         </div>
         <div class="input__container">
         <input type="text" data-input class="chat__input"/>
-        <input type="submit" class="chat__submit" style="xvisibility: hidden;" /></div>
+        <button type="submit" class="chat__submit" style="xvisibility: hidden;" /></button>
     </form>
 `;
 
