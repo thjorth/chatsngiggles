@@ -5,14 +5,19 @@ questionTemplate.innerHTML = `
   background-color: white;
   border: 1px solid #E6E4D9;
   border-radius: 16px;
-  height: 69px;
+  min-height: 69px;
   margin-block: 8px;
   width: 100%;
-  font-size: 16px;
-  font-family: 'Sofia Pro ExtraLight';
+  font-size: 14px;
+  font-family: var(--font-family);
   text-align: left;
-  padding: 0 16px;
+  padding: 8px 16px;
+  color: var(--darkforestgreen);
+  line-height: 2;
 }
+  .data__answers strong {
+    font-size: 16px;
+  }
     </style>
     <div class="question">
         <form>
@@ -67,7 +72,8 @@ class Question extends HTMLElement {
     console.log(this.model);
     this.model.answers.forEach((answer) => {
       const button = document.createElement("button");
-      button.textContent = answer.text;
+
+      button.innerHTML = `<strong>${answer.text}</strong><br/>Blah, blah, blah`;
       button.value = answer.value;
       button.addEventListener("click", (e) => {
         e.preventDefault();

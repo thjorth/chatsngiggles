@@ -1,5 +1,5 @@
 :root {
-  --font-family: "Sofia Pro Regular";
+  --font-family: "Sofia Pro Light";
   --heading-large: "32px";
   --heading-medium:"20px";
   --heading-small: "16px";
@@ -14,6 +14,8 @@
   --text-small: "10px";
   --black: "#04242D";
   --cloudberry: "#FF6A4C";
+  --darkforestgreen: #04242D;
+
 
   --padding-inline: 16px;
   --padding-block: 24px;
@@ -25,15 +27,15 @@
 
 body {
   background: #f8f8f8;
-  font-family: "Sofia Pro Regular";
+  font-family: var(--font-family);
   margin: 0;
   max-height: 100vh;
   max-width: 100vw;
 }
 
 h2 {
-  font-family: "Sofia Pro ExtraLight";
-  font-size: 32px;
+    font-family: var(--font-family);
+    font-size: 32px;
   font-weight: 300;
 }
 
