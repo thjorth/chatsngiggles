@@ -55,6 +55,7 @@ h2 {
   margin-block-end: 36px;
 }
 .header-container {
+  background-color: #F3F3F3;
   backdrop-filter: blur(10px);
   height: 104px;
   position: sticky;
@@ -62,6 +63,7 @@ h2 {
   z-index: 10;
 }
 .header {
+  background-color: #F3F3F3;
   align-items: center;
   backdrop-filter: blur(10px);
   display: flex;
