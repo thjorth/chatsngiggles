@@ -8,7 +8,7 @@ skipButtonTemplate.innerHTML = `
     line-height: 24px;
     margin-block-end: 56px;
     margin-inline: 16px;
-    transition: all 0.6s ease-in-out;
+    transition: all 0.2s ease-in-out;
 
 }
   .skip__button:hover {

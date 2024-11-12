@@ -14,7 +14,7 @@ questionTemplate.innerHTML = `
   padding: 8px 16px;
   color: var(--darkforestgreen);
   line-height: 2;
-  transition: all 0.6s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 .data__answers >button:hover {
   border: 1px solid #FF6A4C;
