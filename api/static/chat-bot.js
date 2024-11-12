@@ -6,7 +6,9 @@ template.innerHTML = `
     background: #FF6A4C;
     border: 1px solid #FF6A4C;
     border-radius: 50%;
+    display: flex;
     height: 40px;
+    justify-items: center;
     width: 40px;
  
 &:hover, &:focus {
@@ -26,8 +28,8 @@ template.innerHTML = `
 .chat__input {
     border: none;
     height: 48px;
-    min-width:290px ;
-    max-width:300px ;
+    min-width:290px;
+    max-width:300px;
 }
 </style>
     <form>
@@ -35,7 +37,7 @@ template.innerHTML = `
         </div>
         <div class="input__container">
         <input type="text" data-input class="chat__input"/>
-        <button type="submit" class="chat__submit" style="xvisibility: hidden;" /></button>
+        <button type="submit" class="chat__submit" style="xvisibility: hidden;"><img src="static/assets/submit.svg"/></button>
     </form>
 `;
 
@@ -67,11 +69,13 @@ botAnswerTemplate.innerHTML = `
 const introTemplate = document.createElement("template");
 introTemplate.innerHTML = `
 <style>
-
+.chat__intro__period {
+  color: #FF6A4C;
+}
 </style>
     <div class="chat__intro">
         <div class="chat__intro-content" data-chat-answer>
-            <h1>Hello and welcome</h1>
+            <h1>Hello and welcome<span class="chat__intro__period">.</span></h1>
             <p>
                 How can I help you today?
             </p>

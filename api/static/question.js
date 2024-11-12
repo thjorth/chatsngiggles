@@ -1,16 +1,14 @@
 const questionTemplate = document.createElement("template");
 questionTemplate.innerHTML = `
-    <style>
-      .data__answers >button {
-      border: 1px solid #E6E4D9;
-border-radius: 16px;
-      height: 69px;
-      width: 358px;
-      background-color: white;
-      margin-block: 8px;
-      }
-
-
+<style>
+.data__answers >button {
+  background-color: white;
+  border: 1px solid #E6E4D9;
+  border-radius: 16px;
+  height: 69px;
+  margin-block: 8px;
+  width: 358px;
+}
     </style>
     <div class="question">
         <form>
