@@ -47,6 +47,20 @@ margin-block-start: 400px;
 const userQuestionTemplate = document.createElement("template");
 userQuestionTemplate.innerHTML = `
 <style>
+.chat__question {
+  align-items: center;
+  background-color: #FF6A4C;
+  border: 1px solid #FF6A4C;
+  border-radius: 32px 26px 0px 32px;
+  display: flex;
+  height: auto;
+  justify-content: flex-end;
+  margin-block: 24px;
+  margin-inline-start: auto;
+  max-width: 70vw;
+  padding-block: 16px;
+  padding-inline: 24px;
+}
 
 </style>
     <div class="chat__question">
@@ -59,6 +73,19 @@ userQuestionTemplate.innerHTML = `
 const botAnswerTemplate = document.createElement("template");
 botAnswerTemplate.innerHTML = `
 <style>
+.chat__answer{
+  align-items: center;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 26px 32px 32px 0px;
+  display: flex;
+  height: auto;
+  justify-content: flex-start;
+  margin-block: 24px;
+  max-width: 70vw;
+  padding-block: 16px;
+  padding-inline: 24px;
+}
 
 </style>
 

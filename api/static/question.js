@@ -14,6 +14,10 @@ questionTemplate.innerHTML = `
   padding: 8px 16px;
   color: var(--darkforestgreen);
   line-height: 2;
+
+  &:hover, &:focus, &:active,{
+    border: 1px solid #FF6A4C;
+}
 }
   .data__answers strong {
     font-size: 16px;
