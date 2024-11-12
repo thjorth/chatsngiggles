@@ -41,6 +41,9 @@ template.innerHTML = `
 
 const userQuestionTemplate = document.createElement("template");
 userQuestionTemplate.innerHTML = `
+<style>
+
+</style>
     <div class="chat__question">
         <div class="chat__question-content" data-chat-question>
             $q$
@@ -50,7 +53,9 @@ userQuestionTemplate.innerHTML = `
 
 const botAnswerTemplate = document.createElement("template");
 botAnswerTemplate.innerHTML = `
+<style>
 
+</style>
 
     <div class="chat__answer">
         <div class="chat__answer-content" data-chat-answer>
