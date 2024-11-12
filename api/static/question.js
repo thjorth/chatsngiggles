@@ -7,7 +7,11 @@ questionTemplate.innerHTML = `
   border-radius: 16px;
   height: 69px;
   margin-block: 8px;
-  width: 358px;
+  width: 100%;
+  font-size: 16px;
+  font-family: 'Sofia Pro ExtraLight';
+  text-align: left;
+  padding: 0 16px;
 }
     </style>
     <div class="question">
