@@ -8,12 +8,23 @@ skipButtonTemplate.innerHTML = `
     line-height: 24px;
     margin-block-end: 56px;
     margin-inline: 16px;
+    transition: all 0.6s ease-in-out;
 
-&:hover, &:focus {
+}
+  .skip__button:hover {
     color: #04242D;
     cursor: pointer;
     text-decoration: underline;
 }
+  .skip__button:focus {
+    color: #04242D;
+    cursor: pointer;
+    text-decoration: underline;
+}
+  .skip__button:active {
+    color: #04242D;
+    cursor: pointer;
+    text-decoration: underline;
 }
 </style>
     <div class="skip">

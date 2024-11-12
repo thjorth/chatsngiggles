@@ -14,10 +14,16 @@ questionTemplate.innerHTML = `
   padding: 8px 16px;
   color: var(--darkforestgreen);
   line-height: 2;
-
-  &:hover, &:focus, &:active,{
-    border: 1px solid #FF6A4C;
+  transition: all 0.6s ease-in-out;
 }
+.data__answers >button:hover {
+  border: 1px solid #FF6A4C;
+}
+.data__answers >button:focus {
+  border: 1px solid #FF6A4C;
+}
+  .data__answers >button:active {
+  border: 1px solid #FF6A4C;
 }
   .data__answers strong {
     font-size: 16px;
