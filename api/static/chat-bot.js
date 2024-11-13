@@ -33,6 +33,7 @@ margin-block-start: 400px;
        margin-inline-start: 20px;
     font-size: 16px;
     font-family: Sofia Pro Regular;
+    outline: none;
 }
 </style>
     <form>
