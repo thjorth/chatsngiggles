@@ -17,11 +17,12 @@
   --darkforestgreen: #04242D;
 
 
-  --padding-inline: 16px;
+  --padding-inline: 18px;
   --padding-block: 24px;
 
   --margin-inline: 16px;
   --margin-block: 24px;
+  --margin-block-end-large: 36px;
 
 }
 
@@ -51,15 +52,23 @@ h2 {
   background-color: #F3F3F3;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 100vh;
+  margin-block-end: 36px;
 }
 .header-container {
+  background-color: #F3F3F3;
+  backdrop-filter: blur(10px);
   height: 104px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 .header {
+  background-color: #F3F3F3;
   align-items: center;
   backdrop-filter: blur(10px);
   display: flex;
+  position: sticky;
+  top: 0;
   flex-direction: row;
   padding-inline: var(--padding-inline);
   margin-block: var(--margin-block);
@@ -69,8 +78,10 @@ h2 {
   align-content: baseline;
 }
 .flow-container {
+  height: calc(100vh - 180px);
+  overflow-y: scroll;
   padding-inline: var(--padding-inline);
-  margin-block: var(--margin-block);
+
 }
 .footer {
   background-color: #F3F3F3;

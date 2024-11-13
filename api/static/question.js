@@ -14,6 +14,16 @@ questionTemplate.innerHTML = `
   padding: 8px 16px;
   color: var(--darkforestgreen);
   line-height: 2;
+  transition: all 0.2s ease-in-out;
+}
+.data__answers >button:hover {
+  border: 1px solid #FF6A4C;
+}
+.data__answers >button:focus {
+  border: 1px solid #FF6A4C;
+}
+  .data__answers >button:active {
+  border: 1px solid #FF6A4C;
 }
   .data__answers strong {
     font-size: 16px;
@@ -25,6 +35,7 @@ questionTemplate.innerHTML = `
             <div class="data__answers" data-answers></div>
         </form>
     </div>
+      
 `;
 
 class Question extends HTMLElement {
