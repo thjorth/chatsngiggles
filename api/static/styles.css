@@ -55,7 +55,7 @@ h2 {
   margin-block-end: 36px;
 }
 .header-container {
-  background-color: #F3F3F3;
+  background-color: rgba(243, 243, 243, 0.7);
   backdrop-filter: blur(10px);
   height: 104px;
   position: sticky;
@@ -63,9 +63,7 @@ h2 {
   z-index: 10;
 }
 .header {
-  background-color: #F3F3F3;
   align-items: center;
-  backdrop-filter: blur(10px);
   display: flex;
   position: sticky;
   top: 0;
@@ -81,6 +79,8 @@ h2 {
   height: calc(100vh - 180px);
   overflow-y: scroll;
   padding-inline: var(--padding-inline);
+  margin-top: -104px;
+  padding-top: 104px;
 
 }
 .footer {
