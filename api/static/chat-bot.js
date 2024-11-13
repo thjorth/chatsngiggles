@@ -61,6 +61,7 @@ userQuestionTemplate.innerHTML = `
   max-width: 70vw;
   padding-block: 16px;
   padding-inline: 24px;
+  color: white;
 }
 
 </style>
