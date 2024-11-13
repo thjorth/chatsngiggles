@@ -44,13 +44,10 @@ template.innerHTML = `
     outline: none;
 }
 </style>
-    <form class="input__form">
+    <div class="input__form">
         <div class="container" data-response>
         </div>
-        <div class="input__container">
-        <input type="text" data-input class="chat__input" placeholder="What are you looking for?"></input>
-        <button type="submit" class="chat__submit" style="xvisibility: hidden;"><img src="static/assets/submit.svg"/></button>
-    </form>
+    </div>
 `;
 
 const userQuestionTemplate = document.createElement("template");
@@ -128,10 +125,7 @@ class ChatBot extends HTMLElement {
     super();
     this.root = this.attachShadow({ mode: "open" });
     this.root.appendChild(template.content.cloneNode(true));
-    this._form = this.root.querySelector("form");
-    this._form.addEventListener("submit", (event) => this.submit(event));
-    this._input = this._form.querySelector("[data-input]");
-    this._response = this._form.querySelector("[data-response]");
+    this._response = this.root.querySelector("[data-response]");
 
     this.clearContext();
     document.addEventListener("step:activate", (e) => {
@@ -141,6 +135,11 @@ class ChatBot extends HTMLElement {
         document.dispatchEvent(event);
       }
     });
+    document.addEventListener('chat:ask', (e) => {
+        if (e.detail) {
+            this.ask(e.detail, false);
+        }
+    })
   }
 
   submit(event) {

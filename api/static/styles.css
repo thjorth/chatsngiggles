@@ -72,6 +72,9 @@ h2 {
   margin-block: var(--margin-block);
   justify-content: space-between;
 }
+.footer {
+    padding: 8px 16px;
+}
 .header-logo {
   align-content: baseline;
 }

@@ -6,6 +6,7 @@
     <script src="/static/flow.js"></script>
     <script src="/static/question.js"></script>
     <script src="/static/chat-bot.js"></script>
+    <script src="/static/chat-input.js"></script>
     <script src="/static/skip-button.js"></script>
     <style>
       .flow__hidden {
@@ -18,7 +19,7 @@
       type="text/css"
       href="/static/fonts/font-styles.css"
     />
-    <link rel="stylesheet" type="text/css" href="/static/styles.css?v=1" />
+    <link rel="stylesheet" type="text/css" href="/static/styles.css?v=2" />
   </head>
   <body class="app">
     <div class="app-container">
@@ -44,7 +45,8 @@
                         "answers": [
                             {
                                 "text": "Manual data entry",
-                                "value": "Our main challenge is manual data entry."
+                                "value": "Our main challenge is manual data entry.",
+                                "description": ""
                             },
                             {
                                 "text": "Lack of real-time insights",
@@ -112,6 +114,7 @@
         </flow-component>
       </section>
       <div class="footer">
+        <chat-input></chat-input>
         <skip-button></skip-button>
       </div>
     </div>
