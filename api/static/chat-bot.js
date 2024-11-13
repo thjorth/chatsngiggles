@@ -140,7 +140,7 @@ class ChatBot extends HTMLElement {
     document.addEventListener("step:activate", (e) => {
       if (e.detail === this) {
         this.askInitialQuestion();
-        const event = new Event('chat:activated');
+        const event = new Event("chat:activated");
         document.dispatchEvent(event);
       }
     });
