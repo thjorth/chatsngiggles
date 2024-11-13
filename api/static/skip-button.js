@@ -48,8 +48,8 @@ class SkipButton extends HTMLElement {
       const event = new Event("flow:skip-to-last");
       document.dispatchEvent(event);
     });
-    document.addEventListener('chat:activated', () => {
-        this.root.querySelector('[data-skip-button]').classList.add('-hidden');
+    document.addEventListener("chat:activated", () => {
+      this.root.querySelector("[data-skip-button]").classList.add("-hidden");
     });
   }
 }
