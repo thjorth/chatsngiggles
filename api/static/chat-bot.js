@@ -17,6 +17,8 @@ template.innerHTML = `
     height: 32px;
     justify-items: center;
     width: 32px;
+    position: relative;
+    right:10px;
 
  
 &:hover, &:focus {
@@ -30,6 +32,7 @@ template.innerHTML = `
     border: 1px solid #FF6A4C;
     border-radius: 24px;
     display: flex;
+    position: absolute;
 }
 
 
@@ -38,7 +41,7 @@ template.innerHTML = `
     height: 48px;
     min-width:290px;
     max-width:358px;
-       margin-inline-start: 20px;
+    margin-inline-start: 20px;
     font-size: 16px;
     font-family: Sofia Pro Regular;
     outline: none;
