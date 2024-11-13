@@ -26,9 +26,12 @@ skipButtonTemplate.innerHTML = `
     cursor: pointer;
     text-decoration: underline;
 }
+.-hidden {
+    display: none;
+}
 </style>
     <div class="skip">
-        <button data-skip-button class="skip__button" tabindex="0" style="xvisibility: hidden;">Skip assessment</button>
+        <button data-skip-button class="skip__button" tabindex="0">Skip assessment</button>
     </div>
 
 `;
@@ -44,6 +47,9 @@ class SkipButton extends HTMLElement {
       e.preventDefault();
       const event = new Event("flow:skip-to-last");
       document.dispatchEvent(event);
+    });
+    document.addEventListener('chat:activated', () => {
+        this.root.querySelector('[data-skip-button]').classList.add('-hidden');
     });
   }
 }
