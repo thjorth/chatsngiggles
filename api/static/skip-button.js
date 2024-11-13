@@ -1,6 +1,7 @@
 const skipButtonTemplate = document.createElement("template");
 skipButtonTemplate.innerHTML = `
 <style>
+
 .skip__button {
     all: unset;
     color: gray;
@@ -9,7 +10,6 @@ skipButtonTemplate.innerHTML = `
     margin-block-end: 56px;
     margin-inline: 16px;
     transition: all 0.2s ease-in-out;
-
 }
   .skip__button:hover {
     color: #04242D;
@@ -30,6 +30,7 @@ skipButtonTemplate.innerHTML = `
     <div class="skip">
         <button data-skip-button class="skip__button" tabindex="0" style="xvisibility: hidden;">Skip assessment</button>
     </div>
+
 `;
 
 class SkipButton extends HTMLElement {

@@ -76,14 +76,22 @@ h2 {
   align-content: baseline;
 }
 .flow-container {
-  height: calc(100vh - 180px);
-  overflow-y: scroll;
-  padding-inline: var(--padding-inline);
-  margin-top: -104px;
-  padding-top: 104px;
+  @media (max-width: 420px) {
+    height: calc(100vh - 180px);
+    margin-top: 0px;
+    padding-inline: var(--padding-inline);
+  }
+  @media (min-width: 420px) {
+    height: calc(100vh - 180px);
+    overflow-y: scroll;
+    padding-inline: var(--padding-inline);
+    margin-top: -104px;
+    padding-top: 104px;
+  }
+
 
 }
 .footer {
-  background-color: #F3F3F3;
+  /* background-color: #F3F3F3; */
   }
 

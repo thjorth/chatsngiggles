@@ -1,7 +1,14 @@
 const template = document.createElement("template");
 template.innerHTML = `
 <style>
-.chat__submit{
+.input__form {
+
+ @media (max-width: 420px) {
+ align-items: baseline;
+
+    }
+}
+.chat__submit {
     all: unset;
     background: #FF6A4C;
     border: 1px solid #FF6A4C;
@@ -10,6 +17,7 @@ template.innerHTML = `
     height: 32px;
     justify-items: center;
     width: 32px;
+
  
 &:hover, &:focus {
     opacity: 0.5;
@@ -17,14 +25,14 @@ template.innerHTML = `
 }
 }
 .input__container {
-margin-block-start: 400px;
     align-items: center;
     background: white;
     border: 1px solid #FF6A4C;
     border-radius: 24px;
     display: flex;
-
 }
+
+
 .chat__input {
     border: none;
     height: 48px;
@@ -36,7 +44,7 @@ margin-block-start: 400px;
     outline: none;
 }
 </style>
-    <form>
+    <form class="input__form">
         <div class="container" data-response>
         </div>
         <div class="input__container">
