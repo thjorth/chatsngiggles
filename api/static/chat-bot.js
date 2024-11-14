@@ -46,6 +46,13 @@ template.innerHTML = `
     font-family: Sofia Pro Regular;
     outline: none;
 }
+.chat__thinking {
+	margin-top: -7px;
+	margin-bottom: 20px;
+}
+.chat__thinking-img {
+	width: 30px;
+}
 </style>
     <div class="input__form">
         <div class="container" data-response>
@@ -123,6 +130,12 @@ introTemplate.innerHTML = `
     </div>
 `;
 
+const thinkingHtml = `
+<div class="chat__thinking" id="thinking">
+	<img src="/static/assets/thinking.gif" class="chat__thinking-img" />
+</div>
+`;
+
 class ChatBot extends HTMLElement {
 	constructor() {
 		super();
@@ -130,6 +143,7 @@ class ChatBot extends HTMLElement {
 		this.root.appendChild(template.content.cloneNode(true));
 		this._response = this.root.querySelector("[data-response]");
 		this.lastQuestion = null;
+		this.thinkingElm = null;
 
 		this.clearContext();
 		document.addEventListener("step:activate", (e) => {
@@ -148,14 +162,23 @@ class ChatBot extends HTMLElement {
 
 	submit(event) {
 		event.preventDefault();
-		console.log("submit!", this._input.value);
 		this.ask(this._input.value);
+	}
+
+	addThinkingAnimation() {
+		this.thinkingElm = document.createElement('div');
+		this.thinkingElm.innerHTML = thinkingHtml;
+		this._response.appendChild(this.thinkingElm);
 	}
 
 	async ask(question, hideQuestion) {
 		if (!hideQuestion) {
 			this.appendQuestion(question);
 		}
+		else {
+			this.addThinkingAnimation();
+		}
+
 		const response = await fetch("/bot", {
 			method: "POST",
 			headers: {
@@ -167,6 +190,8 @@ class ChatBot extends HTMLElement {
 				context: this.getContextAsString(),
 			}),
 		});
+		
+		// call the chat api
 		const result = await response.json();
 		this.storeContext(result.question, result.markdown);
 		this.appendAnswer(result.html);
@@ -177,11 +202,18 @@ class ChatBot extends HTMLElement {
 		const qContainer = qElement.querySelector("[data-chat-question]");
 		qContainer.innerHTML = qContainer.innerHTML.replace("$q$", question);
 		this._response.appendChild(qElement);
+		this.addThinkingAnimation();
 		this.scrollQuestionToBottom(qContainer.parentElement);
 		this.lastQuestionContainer = qContainer.parentElement;
 	}
 
 	appendAnswer(answer) {
+		// remove the thinking animation
+		if (this.thinkingElm) {
+			this._response.removeChild(this.thinkingElm);
+			this.thinkingElm = null;
+		}
+
 		const aElement = botAnswerTemplate.content.cloneNode(true);
 		const aContainer = aElement.querySelector("[data-chat-answer]");
 		aContainer.innerHTML = aContainer.innerHTML.replace("$a$", answer);
@@ -192,7 +224,7 @@ class ChatBot extends HTMLElement {
 	scrollQuestionToBottom(q) {
 		const qb = q.getBoundingClientRect();
 		const responseArea = document.querySelector('.flow-container');
-		const dScroll = -1 * (responseArea.getBoundingClientRect().height - qb.top - qb.height - 91);
+		const dScroll = -1 * (responseArea.getBoundingClientRect().height - qb.top - qb.height - 130);
 		responseArea.scrollBy({
 			top: dScroll,
 			left: 0,
