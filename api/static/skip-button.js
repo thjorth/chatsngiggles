@@ -7,7 +7,8 @@ skipButtonTemplate.innerHTML = `
     color: gray;
     opacity: 0.5;
     line-height: 24px;
-    margin-block-end: 56px;
+    margin-block-start: 16px;
+    margin-block-end: 20px;
     margin-inline: 16px;
     transition: all 0.2s ease-in-out;
 }

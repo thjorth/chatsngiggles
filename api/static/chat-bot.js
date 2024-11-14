@@ -124,123 +124,151 @@ introTemplate.innerHTML = `
 `;
 
 class ChatBot extends HTMLElement {
-  constructor() {
-    super();
-    this.root = this.attachShadow({ mode: "open" });
-    this.root.appendChild(template.content.cloneNode(true));
-    this._response = this.root.querySelector("[data-response]");
+	constructor() {
+		super();
+		this.root = this.attachShadow({ mode: "open" });
+		this.root.appendChild(template.content.cloneNode(true));
+		this._response = this.root.querySelector("[data-response]");
+		this.lastQuestion = null;
 
-    this.clearContext();
-    document.addEventListener("step:activate", (e) => {
-      if (e.detail === this) {
-        this.askInitialQuestion();
-        const event = new Event("chat:activated");
-        document.dispatchEvent(event);
-      }
-    });
-    document.addEventListener('chat:ask', (e) => {
-        if (e.detail) {
-            this.ask(e.detail, false);
-        }
-    })
-  }
+		this.clearContext();
+		document.addEventListener("step:activate", (e) => {
+			if (e.detail === this) {
+				this.askInitialQuestion();
+				const event = new Event("chat:activated");
+				document.dispatchEvent(event);
+			}
+		});
+		document.addEventListener('chat:ask', (e) => {
+			if (e.detail) {
+				this.ask(e.detail, false);
+			}
+		})
+	}
 
-  submit(event) {
-    event.preventDefault();
-    console.log("submit!", this._input.value);
-    this.ask(this._input.value);
-  }
+	submit(event) {
+		event.preventDefault();
+		console.log("submit!", this._input.value);
+		this.ask(this._input.value);
+	}
 
-  async ask(question, hideQuestion) {
-    if (!hideQuestion) {
-      this.appendQuestion(question);
-    }
-    const response = await fetch("/bot", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        question: question,
-        context: this.getContextAsString(),
-      }),
-    });
-    const result = await response.json();
-    this.storeContext(result.question, result.markdown);
-    this.appendAnswer(result.html);
-  }
+	async ask(question, hideQuestion) {
+		if (!hideQuestion) {
+			this.appendQuestion(question);
+		}
+		const response = await fetch("/bot", {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				question: question,
+				context: this.getContextAsString(),
+			}),
+		});
+		const result = await response.json();
+		this.storeContext(result.question, result.markdown);
+		this.appendAnswer(result.html);
+	}
 
-  appendQuestion(question) {
-    const qElement = userQuestionTemplate.content.cloneNode(true);
-    const qContainer = qElement.querySelector("[data-chat-question]");
-    qContainer.innerHTML = qContainer.innerHTML.replace("$q$", question);
-    this._response.appendChild(qElement);
-  }
+	appendQuestion(question) {
+		const qElement = userQuestionTemplate.content.cloneNode(true);
+		const qContainer = qElement.querySelector("[data-chat-question]");
+		qContainer.innerHTML = qContainer.innerHTML.replace("$q$", question);
+		this._response.appendChild(qElement);
+		this.scrollQuestionToBottom(qContainer.parentElement);
+		this.lastQuestionContainer = qContainer.parentElement;
+	}
 
-  appendAnswer(answer) {
-    const aElement = botAnswerTemplate.content.cloneNode(true);
-    const aContainer = aElement.querySelector("[data-chat-answer]");
-    aContainer.innerHTML = aContainer.innerHTML.replace("$a$", answer);
-    this._response.appendChild(aElement);
-  }
+	appendAnswer(answer) {
+		const aElement = botAnswerTemplate.content.cloneNode(true);
+		const aContainer = aElement.querySelector("[data-chat-answer]");
+		aContainer.innerHTML = aContainer.innerHTML.replace("$a$", answer);
+		this._response.appendChild(aElement);
+		this.scrollLastQuestionToTop();
+	}
 
-  askInitialQuestion() {
-    const seeds = localStorage.getItem("seeds")
-      ? JSON.parse(localStorage.getItem("seeds"))
-      : [];
-    if (seeds.length > 0) {
-      this.ask("What do you suggest Crayon could help us with?", true);
-    } else {
-      this._response.appendChild(introTemplate.content.cloneNode(true));
-    }
-  }
+	scrollQuestionToBottom(q) {
+		const qb = q.getBoundingClientRect();
+		const responseArea = document.querySelector('.flow-container');
+		const dScroll = -1 * (responseArea.getBoundingClientRect().height - qb.top - qb.height - 91);
+		responseArea.scrollBy({
+			top: dScroll,
+			left: 0,
+			behavior: 'smooth',
+		});
+	}
 
-  clearContext() {
-    if (localStorage.getItem("context")) {
-      localStorage.removeItem("context");
-    }
-  }
+	scrollLastQuestionToTop() {
+		if (this.lastQuestionContainer) {
+			const qb = this.lastQuestionContainer.getBoundingClientRect();
+			const responseArea = document.querySelector('.flow-container');
+			const dScroll = -1 * (88 - qb.top);
+			responseArea.scrollBy({
+				top: dScroll,
+				left: 0,
+				behavior: 'smooth',
+			});
+		}
+	}
 
-  storeContext(question, answer) {
-    const context = localStorage.getItem("context")
-      ? JSON.parse(localStorage.getItem("context"))
-      : [];
-    context.push({
-      user: question,
-      assistant: answer,
-    });
-    localStorage.setItem("context", JSON.stringify(context));
-  }
+	askInitialQuestion() {
+		const seeds = localStorage.getItem("seeds")
+			? JSON.parse(localStorage.getItem("seeds"))
+			: [];
+		if (seeds.length > 0) {
+			this.ask("What do you suggest Crayon could help us with?", true);
+		} else {
+			this._response.appendChild(introTemplate.content.cloneNode(true));
+		}
+	}
 
-  getContext() {
-    if (localStorage.getItem("context")) {
-      return JSON.parse(localStorage.getItem("context"));
-    }
-    return [];
-  }
+	clearContext() {
+		if (localStorage.getItem("context")) {
+			localStorage.removeItem("context");
+		}
+	}
 
-  getContextAsString() {
-    const seeds = localStorage.getItem("seeds")
-      ? JSON.parse(localStorage.getItem("seeds"))
-      : [];
-    let seed = "";
-    if (seeds.length > 0) {
-      seed = seeds.join(" ");
-      seed +=
-        " Please keep this in mind when aswering all questions. When replying, do not use emojis. Keep the answers to a few paragraphs. For the first question, please invite to ask more questions in the chat or contact sales.\n\n";
-    }
+	storeContext(question, answer) {
+		const context = localStorage.getItem("context")
+			? JSON.parse(localStorage.getItem("context"))
+			: [];
+		context.push({
+			user: question,
+			assistant: answer,
+		});
+		localStorage.setItem("context", JSON.stringify(context));
+	}
 
-    const context = this.getContext();
-    console.log("context:", context);
-    let contextFormattedArray = [];
-    context.forEach((element) => {
-      contextFormattedArray.push(
-        `user: ${element.user}\nassistant: ${element.assistant}\n\n\n`
-      );
-    });
-    return seed + contextFormattedArray.join("\n******\n");
-  }
+	getContext() {
+		if (localStorage.getItem("context")) {
+			return JSON.parse(localStorage.getItem("context"));
+		}
+		return [];
+	}
+
+	getContextAsString() {
+		const seeds = localStorage.getItem("seeds")
+			? JSON.parse(localStorage.getItem("seeds"))
+			: [];
+		let seed = "";
+		if (seeds.length > 0) {
+			seed = seeds.join(" ");
+			seed +=
+				" Please keep this in mind when aswering all questions. When replying, do not use emojis. Keep the answers to a few paragraphs. For the first question, please invite to ask more questions in the chat or contact sales.\n\n";
+		}
+
+		const context = this.getContext();
+		console.log("context:", context);
+		let contextFormattedArray = [];
+		context.forEach((element) => {
+			contextFormattedArray.push(
+				`user: ${element.user}\nassistant: ${element.assistant}\n\n\n`
+			);
+		});
+		return seed + contextFormattedArray.join("\n******\n");
+	}
 }
 
 customElements.define("chat-bot", ChatBot);

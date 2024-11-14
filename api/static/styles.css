@@ -91,22 +91,32 @@ h2 {
 
 .flow-container {
 	@media (max-width: 420px) {
-		height: calc(100vh - 180px);
 		margin-top: 0px;
 		padding-inline: var(--padding-inline);
 	}
 
 	@media (min-width: 420px) {
-		height: calc(100vh - 180px);
 		overflow-y: scroll;
 		padding-inline: var(--padding-inline);
 		margin-top: -104px;
 		padding-top: 104px;
 	}
 	overflow: scroll;
-
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding-top: 88px;
+	padding-bottom: 88px;
 }
 
 .footer {
 	/* background-color: #F3F3F3; */
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(243, 243, 243, 0.7);
+	backdrop-filter: blur(10px);
 }

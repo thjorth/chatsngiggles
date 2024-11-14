@@ -26,7 +26,7 @@ chatInputTemplate.innerHTML = `
             border-radius: 24px;
             display: flex;
             position: relative;
-            margin-botton: 10px;
+            margin: 12px 0;
         }
         .chat__input {
             border: none;
