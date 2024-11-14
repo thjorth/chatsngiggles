@@ -13,7 +13,7 @@ questionTemplate.innerHTML = `
   text-align: left;
   padding: 8px 16px;
   color: var(--darkforestgreen);
-  line-height: 2;
+  line-height: 1.3;
   transition: all 0.2s ease-in-out;
 }
 .data__answers >button:hover {
@@ -27,6 +27,7 @@ questionTemplate.innerHTML = `
 }
   .data__answers strong {
     font-size: 16px;
+    line-height: 2;
   }
     </style>
     <div class="question">
@@ -39,76 +40,76 @@ questionTemplate.innerHTML = `
 `;
 
 class Question extends HTMLElement {
-  static get observedAttributes() {
-    return ["question"];
-  }
-
-  constructor() {
-    super();
-    this.root = this.attachShadow({ mode: "open" });
-    this.root.appendChild(questionTemplate.content.cloneNode(true));
-    this.model = {};
-    this.uiHasBeenBuilt = false;
-    this.initLocalStorage();
-  }
-
-  connectedCallback() {}
-
-  initLocalStorage() {
-    if (localStorage.getItem("seeds")) {
-      localStorage.removeItem("seeds");
+    static get observedAttributes() {
+        return ["question"];
     }
-    localStorage.setItem("seeds", JSON.stringify([]));
-  }
 
-  attributeChangedCallback(property, oldValue, newValue) {
-    if (this.uiHasBeenBuilt) {
-      return;
+    constructor() {
+        super();
+        this.root = this.attachShadow({ mode: "open" });
+        this.root.appendChild(questionTemplate.content.cloneNode(true));
+        this.model = {};
+        this.uiHasBeenBuilt = false;
+        this.initLocalStorage();
     }
-    switch (property) {
-      case "question":
-        try {
-          this.model = JSON.parse(newValue);
-        } catch (ex) {
-          console.log(ex);
+
+    connectedCallback() { }
+
+    initLocalStorage() {
+        if (localStorage.getItem("seeds")) {
+            localStorage.removeItem("seeds");
         }
-        break;
+        localStorage.setItem("seeds", JSON.stringify([]));
     }
-    this.buildUi();
-    console.log("this.model", this.model);
-  }
 
-  buildUi() {
-    this.root.querySelector("[data-question]").innerHTML = this.model.question;
-    console.log(this.model);
-    this.model.answers.forEach((answer) => {
-      const button = document.createElement("button");
-
-      button.innerHTML = `<strong>${answer.text}</strong><br/>Blah, blah, blah`;
-      button.value = answer.value;
-      button.addEventListener("click", (e) => {
-        e.preventDefault();
-        this.recordAnswer(e.target.value);
-        this.proceed();
-      });
-      this.root.querySelector("[data-answers]").appendChild(button);
-    });
-    this.uiHasBeenBuilt = true;
-  }
-
-  recordAnswer(answer) {
-    const seeds = JSON.parse(localStorage.getItem("seeds"));
-    seeds.push(answer);
-    localStorage.setItem("seeds", JSON.stringify(seeds));
-  }
-
-  proceed(e) {
-    if (e) {
-      e.preventDefault();
+    attributeChangedCallback(property, oldValue, newValue) {
+        if (this.uiHasBeenBuilt) {
+            return;
+        }
+        switch (property) {
+            case "question":
+                try {
+                    this.model = JSON.parse(newValue);
+                } catch (ex) {
+                    console.log(ex);
+                }
+                break;
+        }
+        this.buildUi();
+        console.log("this.model", this.model);
     }
-    const event = new Event("flow:next");
-    document.dispatchEvent(event);
-  }
+
+    buildUi() {
+        this.root.querySelector("[data-question]").innerHTML = this.model.question;
+        console.log(this.model);
+        this.model.answers.forEach((answer) => {
+            const button = document.createElement("button");
+
+            button.innerHTML = `<strong>${answer.text}</strong><br/>${answer.description}`;
+            button.value = answer.value;
+            button.addEventListener("click", (e) => {
+                e.preventDefault();
+                this.recordAnswer(e.target.value);
+                this.proceed();
+            });
+            this.root.querySelector("[data-answers]").appendChild(button);
+        });
+        this.uiHasBeenBuilt = true;
+    }
+
+    recordAnswer(answer) {
+        const seeds = JSON.parse(localStorage.getItem("seeds"));
+        seeds.push(answer);
+        localStorage.setItem("seeds", JSON.stringify(seeds));
+    }
+
+    proceed(e) {
+        if (e) {
+            e.preventDefault();
+        }
+        const event = new Event("flow:next");
+        document.dispatchEvent(event);
+    }
 }
 
 customElements.define("question-component", Question);
