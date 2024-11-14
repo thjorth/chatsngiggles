@@ -132,13 +132,15 @@
     </div>
 
     <script>
-        let vh = window.visualViewport.height;
-        document.querySelector(':root').style.setProperty('--vh', `${vh}px`);
-        window.visualViewport.addEventListener('resize', () => {
-            vh = window.visualViewport.height;
-            console.log('setting --vh to', vh);
+        setTimeout(() => {
+            let vh = window.visualViewport.height;
             document.querySelector(':root').style.setProperty('--vh', `${vh}px`);
-        });
+            window.visualViewport.addEventListener('resize', () => {
+                vh = window.visualViewport.height;
+                console.log('setting --vh to', vh);
+                document.querySelector(':root').style.setProperty('--vh', `${vh}px`);
+            });
+        }, 100);
 
     </script>
   </body>
