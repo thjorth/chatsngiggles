@@ -149,15 +149,25 @@ app.use(express.json());
 
 app.post("/bot", async (req, res) => {
     console.log('context + question:\n\n' + req.body.context + '\n\n' + req.body.question);
-    const result = await ask(req.body.context + '\n\n' + req.body.question);
-    const markdown = result.response.text();
-    const html = marked.parse(markdown);
-
-    return res.json({
-        question: req.body.question,
-        markdown,
-        html,
-    });
+	try {
+		const result = await ask(req.body.context + '\n\n' + req.body.question);
+		const markdown = result.response.text();
+		const html = marked.parse(markdown);
+	
+		return res.json({
+			question: req.body.question,
+			markdown,
+			html,
+		});
+	}
+	catch (error) {
+		console.log('an error occurred:', error);
+		return res.json({
+			question: req.body.question,
+			markdown: 'The AI model is currently overloaded. Please try again later',
+			html: '<p>The AI model is currently overloaded. Please try again later</p>',
+		});
+	}
 
 });
 
